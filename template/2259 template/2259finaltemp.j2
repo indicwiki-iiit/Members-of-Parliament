@@ -1,0 +1,227 @@
+{# Variables #}
+{% if te_gender == 'పురుషుడు' %}
+    {% set v1 = "నాయకుడు" %}
+    {% set v2 = "జన్మించాడు" %}
+    {% set v3 = "ఆయన" %}
+    {% set v4 = "చేసుకున్నాడు" %}
+    {% set v5 = "ఇతనికి" %}
+    {% set v6 = "సభ్యుడిగా" %}
+    {% set v7 = "ఇతను" %}
+    {% set v8 = "సభ్యుడు" %}
+    {% set v9 = "ఉన్నాడు"%}
+{% else %}
+    {% set v1 = "నాయకురాలు" %}
+    {% set v2 = "జన్మించింది" %}
+    {% set v3 = "ఆమె" %}
+    {% set v4 = "చేసుకుంది" %}
+    {% set v5 = "ఈమెకి" %}
+    {% set v6 = "సభ్యురాలిగా" %}
+    {% set v7 = "ఆమె" %}
+    {% set v8 = "సభ్యురాలు" %}
+    {% set v9 = "ఉంది"%}
+{% endif %}
+
+
+{# To get the Infobox #}
+{%- macro get_infobox(te_name, te_edu, te_per, te_party, te_constituency, te_state, te_nat) -%}
+    {{-'{{Infobox officeholder'}} 
+    {%- if te_name and te_name != 'None' -%}
+        {{'\n| name = ' + te_name}}
+    {%- endif -%}
+    {%- if te_edu and te_edu != 'None' -%}
+        {{'\n| Education = ' + te_edu}}
+    {%- endif -%}
+    {%- if te_per and te_per != 'None' -%}
+        {{'\n| residence = ' + te_per}}
+    {%- endif -%}
+    {%- if te_party and te_party != 'None' -%}
+        {{'\n| party = ' + te_party}}
+    {%- endif -%}
+    {%- if te_constituency and te_constituency != 'None' -%}
+        {{'\n| constituency = ' + te_constituency}}
+    {%- endif -%}
+    {%- if te_state and te_state != 'None' -%}
+        {{'\n| state = ' + te_state}}
+    {%- endif -%}
+    {%- if te_nat and te_nat != 'None' -%}
+        {{'\n| citizenship = ' + te_nat}}
+    {%- endif -%}
+    {{'\n}}\n'}}
+{%- endmacro -%}
+
+{# To get the Intro Line #}
+{%- macro get_intro_line(te_name, te_state) -%}
+    {{- te_name + '<ref> '+ references +' </ref>' +' '  + te_state + ' కు ' + ' చెందిన భారతీయ '+ '[https://tewiki.iiit.ac.in/index.php?title=%E0%B0%B0%E0%B0%BE%E0%B0%9C%E0%B0%95%E0%B1%80%E0%B0%AF%E0%B0%B5%E0%B1%87%E0%B0%A4%E0%B1%8D%E0%B0%A4' + ' రాజకీయ ' +  v1 +']'+ '. ' -}}
+{%- endmacro -%}
+
+{# To get the Intro para next line #}
+{%- macro get_intro_next(te_para) -%}
+    {{- te_para -}}
+{%- endmacro -%}
+
+{#To get Public offices held#}
+{%- macro get_offices(te_pubofc) -%}
+    {%- if te_pubofc and te_pubofc  != 'None' -%}
+        {{'\n=నిర్వహించిన ప్రభుత్వ కార్యాలయాలు=\n' -}}
+        {{- te_pubofc  + '. '  -}}
+    {%- endif -%}
+{%- endmacro -%}
+
+{#To get Previous Association with Political Parties#}
+{%- macro get_association(te_prevasso) -%}
+    {%- if te_prevasso and te_prevasso != 'None' -%}
+        {{'\n=రాజకీయ పార్టీలతో మునుపటి అనుబంధం=\n' -}}
+        {{- te_prevasso  + '. '  -}}
+    {%- endif -%}
+{%- endmacro -%}
+
+{#To get Previous Membership#}
+{%- macro get_membership(te_prevmem) -%}
+    {%- if te_prevmem and te_prevmem != 'None' -%}
+        {{'\n=మునుపటి సభ్యత్వం=\n' -}}
+        {{- te_prevmem  + '. '  -}}
+    {%- endif -%}
+{%- endmacro -%}
+
+{#To get Committee Experience#}
+{%- macro get_committeexp(te_comm) -%}
+    {%- if te_comm and te_comm  != 'None' -%}
+        {{'\n=కమిటీ అనుభవం=\n' -}}
+        {{- te_comm  + '. '  -}}
+    {%- endif -%}
+{%- endmacro -%}
+
+{#To get Social activities#}
+{%- macro get_socialactivities(te_social) -%}
+    {%- if te_social and te_social  != 'None' -%}
+        {{'\n=సామాజిక కార్యకలాపాలు=\n' -}}
+        {{- te_social  + '. '  -}}
+    {%- endif -%}
+{%- endmacro -%}
+
+{#To get Favourite pastime and recreation#}
+{%- macro get_pasttime(te_fav) -%}
+    {%- if te_fav and te_fav != 'None' -%}
+        {{'\n=ఇష్టమైన కాలక్షేపం, వినోదం=\n' -}}
+        {{- te_fav + '. '  -}}
+    {%- endif -%}
+{%- endmacro -%}
+
+{#To get Hobbies#}
+{%- macro get_hob(te_hobbies) -%}
+    {%- if te_hobbies and te_hobbies != 'None' -%}
+        {{'\n=అభిరుచులు=\n' -}}
+        {{- te_hobbies + '. '  -}}
+    {%- endif -%}
+{%- endmacro -%}
+
+{#To get Special interests#}
+{%- macro get_specin(te_spec) -%}
+    {%- if te_spec and te_spec != 'None' -%}
+        {{'\n=ప్రత్యేక ఆసక్తులు=\n' -}}
+        {{- te_spec + '. '  -}}
+    {%- endif -%}
+{%- endmacro -%}
+
+{#To get Publications and books#}
+{%- macro get_pubbooks(te_books) -%}
+    {%- if te_books and te_books != 'None' -%}
+        {{'\n=ప్రచురణలు, పుస్తకాలు=\n' -}}
+        {{- te_books + '. '  -}}
+    {%- endif -%}
+{%- endmacro -%}
+
+{#To get Travels abroad#}
+{%- macro get_abrtrav(te_travels) -%}
+    {%- if te_travels and te_travels != 'None' -%}
+        {{'\n=విదేశాలకు ప్రయాణాలు=\n' -}}
+        {{- te_travels + '. '  -}}
+    {%- endif -%}
+{%- endmacro -%}
+
+{#To get Sports and clubs#}
+{%- macro get_sportclub(te_sports) -%}
+    {%- if te_sports and te_sports != 'None' -%}
+        {{'\n=క్రీడలు, క్లబ్బులు=\n' -}}
+        {{- te_sports + '. '  -}}
+    {%- endif -%}
+{%- endmacro -%}
+
+{#To get Accomplishments in Arts and Science#}
+{%- macro get_artsci(te_accom) -%}
+    {%- if te_accom and te_accom != 'None' -%}
+        {{'\n=ఆర్ట్స్, సైన్స్ లో సాధించిన విజయాలు=\n' -}}
+        {{- te_accom + '. '  -}}
+    {%- endif -%}
+{%- endmacro -%}
+
+{#To get Delegation to Foreign Countries#}
+{%- macro get_dele(te_foreign) -%}
+    {%- if te_foreign and te_foreign != 'None' -%}
+        {{'\n=విదేశాలకు ప్రతినిధి బృందం=\n' -}}
+        {{- te_foreign + '. '  -}}
+    {%- endif -%}
+{%- endmacro -%}
+
+{#To get Other information#}
+{%- macro get_other(te_info) -%}
+    {%- if te_info and te_info != 'None' -%}
+        {{'\n=ఇతర సమాచారం=\n' -}}
+        {{- te_info + '. '  -}}
+    {%- endif -%}
+{%- endmacro -%}
+
+{#To get Permanent address#}
+{%- macro get_addr(te_per) -%}
+    {%- if te_per and te_per != 'None' -%}
+        {{'\n=శాశ్వత చిరునామా=\n' -}}
+        {{- te_per + '. '  -}}
+    {%- endif -%}
+{%- endmacro -%}
+
+{# To get the constituency Line #}
+{%- macro get_constituency_line(te_name, te_party, te_state, te_constituency, member) -%}
+    {{- te_name + ' ' + te_party +  ' తరఫున ' + te_state + ' లోని ' + te_constituency + ' నియోజకవర్గానికి ప్రాతినిధ్యం వహిస్తూ ' + member|string + ' [https://tewiki.iiit.ac.in/index.php?title=%E0%B0%B2%E0%B1%8B%E0%B0%95%E0%B1%8D%E2%80%8C%E0%B0%B8%E0%B0%AD లోక్ సభ] '  + v6 + ' ఉన్నారు. ' -}}
+{%- endmacro -%}
+
+{# To get the References #}
+{%- macro get_references(name) -%}
+    {{'\n\n=ప్రస్తావనలు=\n\n<references />'}}
+{%- endmacro -%}
+
+{# To get the Categories #}
+{%- macro get_categories(categories) -%}
+    {%- for category in categories -%}
+        {{category}}
+    {%- endfor -%}
+{%- endmacro -%}
+
+{{- get_infobox(te_name, te_edu, te_per, te_party, te_constituency, te_state, te_nat) -}}
+{{- get_intro_line(te_name, te_state) -}}
+{{- '\n \n' -}}
+{{- get_intro_next(te_para) -}}
+{{- get_offices(te_pubofc) -}}
+{{- get_association(te_prevasso) -}}
+{{- get_membership(te_prevmem) -}}
+{{- get_committeexp(te_comm) -}}
+{{- get_socialactivities(te_social) -}}
+{{- get_pasttime(te_fav) -}}
+{{- get_hob(te_hobbies) -}}
+{{- get_specin(te_spec) -}}
+{{- get_pubbooks(te_books) -}}
+{{- get_abrtrav(te_travels) -}}
+{{- get_sportclub(te_sports) -}}
+{{- get_artsci(te_accom) -}}
+{{- get_dele(te_foreign) -}}
+{{- get_other(te_info) -}}
+{{- get_addr(te_per) -}}
+
+{{'\n=రాజకీయ జీవితము =\n' -}}
+{{- get_constituency_line(te_name, te_party, te_state, te_constituency, member) -}}
+
+
+{{ get_references(name) -}}
+{{ get_categories(categories) -}}
+
+[[వర్గం:తెవికీ {{te_party}} రాజకీయ నాయకులు]]
+[[వర్గం:తెవికీ లోక్ సభ సభ్యులు]]
